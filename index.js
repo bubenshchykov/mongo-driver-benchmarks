@@ -1,35 +1,37 @@
-var clientV1 = require('./node_modules/_mongodb/v1/node_modules/mongodb').MongoClient;
-var clientV2 = require('./node_modules/_mongodb/v2/node_modules/mongodb').MongoClient;
+var v1 = require('./node_modules/mongodb_v1/node_modules/mongodb/package.json').version;
+var v2 = require('./node_modules/mongodb_v2/node_modules/mongodb/package.json').version;
+var clientV1 = require('./node_modules/mongodb_v1/node_modules/mongodb').MongoClient;
+var clientV2 = require('./node_modules/mongodb_v2/node_modules/mongodb').MongoClient;
+
 var benchmarks = require('./benchmarks');
 var async = require('async');
 var Table = require('cli-table');
-
 
 var URI = 'mongodb://localhost/mongobench?journal=false';
 var URI_JOURNAL = 'mongodb://localhost/mongobench?journal=true';
 var RUN_COUNT = 100;
 
-console.log('running benchmarks..');
+console.log('drivers v'+v1+' vs v'+v2+', running benchmarks...');
 async.series({
-	'v1, journal:false': function(cb) {
+	'v1 journal:false': function(cb) {
 		clientV1.connect(URI, function(err, db) {
 			if (err) return cb(err);
 			run({db: db}, cb);
 		});
 	},
-	'v2, journal:false': function(cb) {
+	'v2 journal:false': function(cb) {
 		clientV2.connect(URI, function(err, db) {
 			if (err) return cb(err);
 			run({db: db}, cb);
 		});
 	},
-	'v1, journal:true': function(cb) {
+	'v1 journal:true': function(cb) {
 		clientV1.connect(URI_JOURNAL, function(err, db) {
 			if (err) return cb(err);
 			run({db: db}, cb);
 		});
 	},
-	'v2, journal:true': function(cb) {
+	'v2 journal:true': function(cb) {
 		clientV2.connect(URI_JOURNAL, function(err, db) {
 			if (err) return cb(err);
 			run({db: db}, cb);

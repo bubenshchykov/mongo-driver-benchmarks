@@ -15,6 +15,6 @@
   },
   "scripts": {
     "test": "node index.js",
-    "postinstall": "echo '\nInstalling mongodb driver v1.X ...\n' && mkdir -p ./node_modules/_mongodb/v1/node_modules && npm install --prefix ./node_modules/_mongodb/v1 git+ssh://git@github.com:mongodb/node-mongodb-native.git#V1.4.28 && echo '\nInstalling mongodb driver v2.X ...\n' && mkdir -p ./node_modules/_mongodb/v2/node_modules && npm install --prefix ./node_modules/_mongodb/v2 git+ssh://git@github.com:mongodb/node-mongodb-native.git#V2.0.13"
+    "postinstall": "echo \"\nInstalling mongodb driver v1.X ...\n\" && mkdir -p ./node_modules/mongodb_v1/node_modules && npm install --prefix ./node_modules/mongodb_v1 git+ssh://git@github.com:mongodb/node-mongodb-native.git#V1.4.28 && echo \"\nInstalling mongodb driver v2.X ...\n\" && mkdir -p ./node_modules/mongodb_v2/node_modules && npm install --prefix ./node_modules/mongodb_v2 git+ssh://git@github.com:mongodb/node-mongodb-native.git#V2.0.13"
   }
 }
