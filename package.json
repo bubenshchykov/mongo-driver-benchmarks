@@ -1,0 +1,15 @@
+{
+  "name": "mongo-driver-benchmarks",
+  "version": "0.0.1",
+  "description": "benchmarks comparison for mongodb native driver 1.X and 2.X",
+  "main": "index.js",
+  "author": "bubenshchykov",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^0.9.0",
+    "cli-table": "^0.3.1"
+  },
+  "scripts": {
+    "postinstall": "echo '\nInstalling mongodb driver v1.X ...\n' && npm install --prefix ./node_modules/_mongodb/v1 git+ssh://git@github.com:mongodb/node-mongodb-native.git#V1.4.28 && echo '\nInstalling mongodb driver v1.X ...\n' && npm install --prefix ./node_modules/_mongodb/v2 git+ssh://git@github.com:mongodb/node-mongodb-native.git#V2.0.13"
+  }
+}
