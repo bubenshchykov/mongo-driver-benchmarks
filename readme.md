@@ -1,7 +1,7 @@
-mongodb driver v1.X and v2.X benchmarks
+v1.X vs v2.X benchmarks
 ===
 
-Mongodb native driver has been changed a lot in 2.X [doc](https://github.com/mongodb/node-mongodb-native/blob/2.0/docs/content/meta/changes-from-1.0.md)
+Mongodb native driver has been changed a lot in 2.X [(doc)](https://github.com/mongodb/node-mongodb-native/blob/2.0/docs/content/meta/changes-from-1.0.md).
 
 A simple test runs each command 100 times in series and reports total duration in ms. The data shows
 - driver v2 is almost 4x faster on all basic CRUD queries when journal:false 
@@ -24,3 +24,5 @@ node .
 └──────────────────┴────────┴────────┴────────┴──────┴───────────────┘
 
 ```
+
+You can see and trigger the benchmark on travis [![Build Status](https://travis-ci.org/bubenshchykov/mongo-driver-benchmarks.png?branch=master)](https://travis-ci.org/bubenshchykov/mongo-driver-benchmarks)

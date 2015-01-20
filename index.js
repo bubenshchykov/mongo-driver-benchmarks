@@ -5,19 +5,19 @@ var async = require('async');
 var Table = require('cli-table');
 
 
-var URI = 'mongodb://localhost/mongobench';
+var URI = 'mongodb://localhost/mongobench?journal=false';
 var URI_JOURNAL = 'mongodb://localhost/mongobench?journal=true';
 var RUN_COUNT = 100;
 
 console.log('running benchmarks..');
 async.series({
-	'v1, default': function(cb) {
+	'v1, journal:false': function(cb) {
 		clientV1.connect(URI, function(err, db) {
 			if (err) return cb(err);
 			run({db: db}, cb);
 		});
 	},
-	'v2, default': function(cb) {
+	'v2, journal:false': function(cb) {
 		clientV2.connect(URI, function(err, db) {
 			if (err) return cb(err);
 			run({db: db}, cb);
@@ -68,16 +68,14 @@ function runOne(fn, cb) {
 function tablify(err, res) {
 	if (err) {
 		console.log(err);
-		process.exit(-1);
+		process.exit(1);
 	}
 	var table = new Table({head:['N='+RUN_COUNT+', ms'].concat(Object.keys(benchmarks))});
 	for(var name in res) {
 		var row = {};
-		row[name] = res[name].map(function(test){
-			return test.ms;
-		});
+		row[name] = res[name].map(function(test){return test.ms;});
 		table.push(row)
 	}
 	console.log(table.toString());
-	process.exit(1);
+	process.exit(0);
 }
