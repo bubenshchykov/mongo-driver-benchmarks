@@ -1,4 +1,4 @@
-v1.X vs v2.X benchmarks
+v1.X vs v2.X
 ===
 
 Mongodb native driver has been changed a lot in 2.X [(doc)](https://github.com/mongodb/node-mongodb-native/blob/2.0/docs/content/meta/changes-from-1.0.md).
