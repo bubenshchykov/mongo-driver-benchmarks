@@ -37,7 +37,7 @@ module.exports = {
 };
 
 function getCol(opts, cb) {
-	opts.db.collection('c', function(err, col) {
+	opts.db.collection('_mongobench', function(err, col) {
 		if (err) return cb(err);
 		opts.col = col;
 		cb(null, opts);
