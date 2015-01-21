@@ -3,30 +3,50 @@ v1.X vs v2.X
 
 Mongodb native driver has been changed a lot in 2.X [(doc)](https://github.com/mongodb/node-mongodb-native/blob/2.0/docs/content/meta/changes-from-1.0.md).
 
-A simple test runs each command 100 times in series and reports total duration in ms. The data shows
-- driver v2 is almost 4x faster on all basic CRUD queries when journal:false 
-- driver v2 is almost 2x slower on inserts with journal:true, the rest of queries are a bit faster
+A simple test performce the same operations for each driver: connects to specified or local db, runs each crud command 1000 times in series within _mongobench collection, reports total duration in ms. The data shows
+- driver v2 is visibly faster on all basic CRUD queries when journal:false 
+- driver v2 is visibly slower on inserts with journal:true
+- driver v2 is slightly faster on other crud with journal:true
+
+That depends on environment, mogno version and connection options.
 
 ```shell
-mongod --dbpath ~/data/db --journal
+mongod --journal
 
 npm install
-node .
+npm test
 
-mongod version v2.6.4
-drivers v1.4.28 vs v2.0.13, running benchmarks...
-┌──────────────────┬────────┬────────┬────────┬──────┬───────────────┐
-│ N=100, ms        │ insert │ update │ remove │ save │ findAndModify │
-├──────────────────┼────────┼────────┼────────┼──────┼───────────────┤
-│ v1 journal:false │ 418    │ 404    │ 396    │ 411  │ 351           │
-├──────────────────┼────────┼────────┼────────┼──────┼───────────────┤
-│ v2 journal:false │ 108    │ 115    │ 111    │ 116  │ 112           │
-├──────────────────┼────────┼────────┼────────┼──────┼───────────────┤
-│ v1 journal:true  │ 1727   │ 3792   │ 3861   │ 3759 │ 2105          │
-├──────────────────┼────────┼────────┼────────┼──────┼───────────────┤
-│ v2 journal:true  │ 3540   │ 3551   │ 3584   │ 3574 │ 1773          │
-└──────────────────┴────────┴────────┴────────┴──────┴───────────────┘
+testing localhost mongo with journal:false
+uri: mongodb://localhost/_mongobench?journal=false
+opts: {}
+drivers: v1.4.28 vs v2.0.13
+running benchmarks...
+┌────────────┬────────┬────────┬────────┬──────┬───────────────┐
+│ n=1000, ms │ insert │ update │ remove │ save │ findAndModify │
+├────────────┼────────┼────────┼────────┼──────┼───────────────┤
+│ v1         │ 1607   │ 1709   │ 1742   │ 1599 │ 1540          │
+├────────────┼────────┼────────┼────────┼──────┼───────────────┤
+│ v2         │ 1264   │ 1360   │ 1423   │ 1257 │ 1273          │
+└────────────┴────────┴────────┴────────┴──────┴───────────────┘
+
+testing localhost mongo with journal:true
+uri: mongodb://localhost/_mongobench?journal=true
+opts: {}
+drivers: v1.4.28 vs v2.0.13
+running benchmarks...
+┌────────────┬────────┬────────┬────────┬───────┬───────────────┐
+│ n=1000, ms │ insert │ update │ remove │ save  │ findAndModify │
+├────────────┼────────┼────────┼────────┼───────┼───────────────┤
+│ v1         │ 23175  │ 37440  │ 37403  │ 36776 │ 25931         │
+├────────────┼────────┼────────┼────────┼───────┼───────────────┤
+│ v2         │ 35607  │ 35660  │ 35590  │ 35569 │ 17693         │
+└────────────┴────────┴────────┴────────┴───────┴───────────────┘
 
 ```
+
+You can pass customer connection string and replica set name
+```javascript
+node index.js [connection string] [replica set name]
+node index.js mongodb://m0.ocean.com,m1.ocean.com/_mongobench?journal=true&ssl=true
 
 You can see and trigger the benchmark on travis [![Build Status](https://travis-ci.org/bubenshchykov/mongo-driver-benchmarks.png?branch=master)](https://travis-ci.org/bubenshchykov/mongo-driver-benchmarks)

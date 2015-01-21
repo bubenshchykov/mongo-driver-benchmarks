@@ -14,7 +14,7 @@
     "cli-table": "^0.3.1"
   },
   "scripts": {
-    "test": "node index.js",
+    "test": "echo \"testing localhost mongo with journal:false\" && node . mongodb://localhost/_mongobench?journal=false && echo \"\ntesting localhost mongo with journal:true\" && node . mongodb://localhost/_mongobench?journal=true",
     "postinstall": "echo \"\nInstalling mongodb driver v1.X ...\n\" && mkdir -p ./node_modules/mongodb_v1/node_modules && npm install --prefix ./node_modules/mongodb_v1 git+https://github.com/mongodb/node-mongodb-native.git#V1.4.28 && echo \"\nInstalling mongodb driver v2.X ...\n\" && mkdir -p ./node_modules/mongodb_v2/node_modules && npm install --prefix ./node_modules/mongodb_v2 git+https://github.com/mongodb/node-mongodb-native.git#V2.0.13"
   }
 }
