@@ -55,4 +55,4 @@ node index.js [connection string] [replica set name]
 node index.js mongodb://m0.ocean.com,m1.ocean.com/_mongobench?journal=true&ssl=true
 ```
 
-You can see and trigger the benchmark on travis [![Build Status](https://travis-ci.org/bubenshchykov/mongo-driver-benchmarks.png?branch=master)](https://travis-ci.org/bubenshchykov/mongo-driver-benchmarks)
+See or trigger the benchmark on travis [![Build Status](https://travis-ci.org/bubenshchykov/mongo-driver-benchmarks.png?branch=master)](https://travis-ci.org/bubenshchykov/mongo-driver-benchmarks)
