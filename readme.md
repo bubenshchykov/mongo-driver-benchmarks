@@ -8,9 +8,12 @@ A simple test runs each command 100 times in series and reports total duration i
 - driver v2 is almost 2x slower on inserts with journal:true, the rest of queries are a bit faster
 
 ```shell
+mongod --dbpath ~/data/db --journal
+
 npm install
 node .
 
+mongod version v2.6.4
 drivers v1.4.28 vs v2.0.13, running benchmarks...
 ┌──────────────────┬────────┬────────┬────────┬──────┬───────────────┐
 │ N=100, ms        │ insert │ update │ remove │ save │ findAndModify │
