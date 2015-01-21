@@ -52,7 +52,7 @@ options
 You can pass customer connection string and replica set name
 ```javascript
 node index.js [connection string] [replica set name]
-node index.js mongodb://m0.ocean.com,m1.ocean.com/_mongobench?journal=true&ssl=true
+node index.js mongodb://m0.ocean.com,m1.ocean.com/_mongobench?journal=true&ssl=true playground_replica
 ```
 
 See or trigger the benchmark on travis [![Build Status](https://travis-ci.org/bubenshchykov/mongo-driver-benchmarks.png?branch=master)](https://travis-ci.org/bubenshchykov/mongo-driver-benchmarks)
