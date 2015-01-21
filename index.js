@@ -8,6 +8,7 @@ var async = require('async');
 var Table = require('cli-table');
 
 var uri = process.argv[2] || 'mongodb://localhost/_mongobench';
+var dbOpts = {reaper: true, replSet: {ha: false}};
 var runCount = 100;
 
 console.log('uri: '+uri);
@@ -16,13 +17,13 @@ console.log('running benchmarks...');
 
 async.series({
 	v1: function(cb) {
-		clientV1.connect(uri, function(err, db) {
+		clientV1.connect(uri, dbOpts, function(err, db) {
 			if (err) return cb(err);
 			run({db: db}, cb);
 		});
 	},
 	v2: function(cb) {
-		clientV2.connect(uri, function(err, db) {
+		clientV2.connect(uri, dbOpts, function(err, db) {
 			if (err) return cb(err);
 			run({db: db}, cb);
 		});
