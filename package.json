@@ -1,6 +1,6 @@
 {
   "name": "mongo-driver-benchmarks",
-  "version": "0.0.21",
+  "version": "0.0.3",
   "description": "benchmarks comparison for mongodb native driver 1.X and 2.X",
   "main": "index.js",
   "author": "bubenshchykov",
